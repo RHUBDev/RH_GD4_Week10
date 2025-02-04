@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpForce = 2f;
     [SerializeField] float gravity = 6f;
     public float mouseSensitivity = 700f;
-    [SerializeField] float lookXLimit = 60f;
+    [SerializeField] float lookXLimit = 85f;
     float rotationX = 0f;
     Vector3 moveDirection;
     CharacterController controller;
@@ -28,9 +28,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 webVector = Vector3.zero;
     private Vector3 extraMovement = Vector3.zero;
     private Vector3 startPos = Vector3.zero;
-    private float webSpeed = 70f;
+    private float webSpeed = 120f;
     private float webJourney = 0f;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private Transform enemy;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
