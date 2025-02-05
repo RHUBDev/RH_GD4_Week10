@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     private float webJourney = 0f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Transform enemy;
+    private int score = 0;
+    [SerializeField] private TMP_Text pointsText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -267,5 +269,12 @@ public class PlayerController : MonoBehaviour
             webbing = false;
             webbed = true;
         }
+    }
+
+    public void AddScore(int scoreToAdd)
+    {
+        score += scoreToAdd;
+
+        pointsText.text = "Score: " + score;
     }
 }

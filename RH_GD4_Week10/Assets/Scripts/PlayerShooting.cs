@@ -68,13 +68,19 @@ public class PlayerShooting : MonoBehaviour
                 lazerLength = (hit.point - gunEnd.transform.position).magnitude;
 
                 ShootableBox targetBox = hit.transform.GetComponent<ShootableBox>();
+                BadGuy badGuy = hit.transform.root.GetComponent<BadGuy>();
 
-                if(targetBox != null)
+                if (targetBox != null)
                 {
                     targetBox.Damage(gunDamage);
                 }
 
-                if(hit.rigidbody != null)
+                if (badGuy != null)
+                {
+                    badGuy.Damage(gunDamage);
+                }
+
+                if (hit.rigidbody != null)
                 {
                     hit.rigidbody.AddForce(-hit.normal * hitForce, ForceMode.Impulse);
                 }
