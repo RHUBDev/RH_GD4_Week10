@@ -31,6 +31,8 @@ public class PlayerShooting : MonoBehaviour
 
     [SerializeField] private TMP_Text ammoText;
 
+    [SerializeField] private LayerMask layerMask;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -59,7 +61,7 @@ public class PlayerShooting : MonoBehaviour
 
             //_lr.SetPosition(0, gunEnd.transform.position);
 
-            if(Physics.Raycast(rayOrigin, playerCam.transform.forward, out hit, range))
+            if(Physics.Raycast(rayOrigin, playerCam.transform.forward, out hit, range, layerMask))
             {
                 //_lr.SetPosition(1, hit.point);
                 //lazerPoint = hit.point - playerCam.transform.forward * 10000;
