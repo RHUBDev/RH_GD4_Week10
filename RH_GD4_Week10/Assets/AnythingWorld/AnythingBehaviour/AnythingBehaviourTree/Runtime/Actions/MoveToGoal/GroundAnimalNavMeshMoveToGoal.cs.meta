@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 61a3ebfb7c32c154c8e8ff8c936c7052
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingBehaviour/AnythingBehaviourTree/Runtime/Actions/MoveToGoal/GroundAnimalNavMeshMoveToGoal.cs
+  uploadId: 686391

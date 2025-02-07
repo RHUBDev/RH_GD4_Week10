@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 86401edeef3728543ab585a76f33d105
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingModels/ObjPipeline/ObjMtlRequester.cs
+  uploadId: 686391

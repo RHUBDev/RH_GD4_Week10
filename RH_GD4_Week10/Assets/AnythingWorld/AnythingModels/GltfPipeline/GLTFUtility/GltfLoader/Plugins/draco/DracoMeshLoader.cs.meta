@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 40c64bfc72178384f93198e18da730b4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingModels/GltfPipeline/GLTFUtility/GltfLoader/Plugins/draco/DracoMeshLoader.cs
+  uploadId: 686391

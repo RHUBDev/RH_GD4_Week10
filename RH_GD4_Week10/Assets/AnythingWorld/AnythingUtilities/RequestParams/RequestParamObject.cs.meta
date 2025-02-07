@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8e08a376a1e5e264e9eb69c792debcd9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingUtilities/RequestParams/RequestParamObject.cs
+  uploadId: 686391

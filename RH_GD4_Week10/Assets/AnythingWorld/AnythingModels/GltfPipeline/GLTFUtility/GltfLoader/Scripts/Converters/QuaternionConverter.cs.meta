@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2cbe765fb9857a44696eb441e0e0bb25
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingModels/GltfPipeline/GLTFUtility/GltfLoader/Scripts/Converters/QuaternionConverter.cs
+  uploadId: 686391

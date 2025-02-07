@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 990f553d49d464441a189751edd1a5b2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingBehaviour/AnythingBehaviourTree/Editor/PropertyDrawers/BlackboardKeyValuePairPropertyDrawer.cs
+  uploadId: 686391

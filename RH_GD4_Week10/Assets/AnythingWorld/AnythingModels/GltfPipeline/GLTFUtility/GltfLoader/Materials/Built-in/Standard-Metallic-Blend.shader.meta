@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7258d825fa9aac6439f21eb173b880c6
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingModels/GltfPipeline/GLTFUtility/GltfLoader/Materials/Built-in/Standard-Metallic-Blend.shader
+  uploadId: 686391

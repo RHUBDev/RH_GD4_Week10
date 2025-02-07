@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 46d5e8d803e252f4499b52e657f8e1a2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingPathCreation/Runtime/GlobalDisplaySettings.cs
+  uploadId: 686391

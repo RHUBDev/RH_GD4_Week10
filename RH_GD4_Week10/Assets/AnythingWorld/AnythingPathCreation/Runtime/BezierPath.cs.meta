@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 756209f371f304fb1920c53a8a25a5e2
+timeCreated: 1516786483
+licenseType: Pro
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingPathCreation/Runtime/BezierPath.cs
+  uploadId: 686391

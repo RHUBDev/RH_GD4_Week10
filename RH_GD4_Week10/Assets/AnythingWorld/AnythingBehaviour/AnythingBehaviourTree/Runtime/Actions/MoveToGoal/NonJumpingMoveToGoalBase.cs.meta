@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 9fac67052f0d4b2db9677f0ca9e08996
+timeCreated: 1707406686
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingBehaviour/AnythingBehaviourTree/Runtime/Actions/MoveToGoal/NonJumpingMoveToGoalBase.cs
+  uploadId: 686391

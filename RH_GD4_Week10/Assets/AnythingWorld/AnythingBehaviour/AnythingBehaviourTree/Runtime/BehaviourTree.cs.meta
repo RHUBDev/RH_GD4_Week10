@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2d285eb63c2cdd74180de7cfceaa96ad
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingBehaviour/AnythingBehaviourTree/Runtime/BehaviourTree.cs
+  uploadId: 686391

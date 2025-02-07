@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class BadGuy : MonoBehaviour
 {
@@ -35,17 +36,22 @@ public class BadGuy : MonoBehaviour
 	private Vector3 lookPoint;
 	private float turnDir = 0;
 	private float lazerInterval = 3;
-	
+	private float resurrectTime = 8;
 	[SerializeField] CapsuleCollider coll;
+	private string levelName;
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Start()
 	{
+		levelName = SceneManager.GetActiveScene().name;
 		rigs = GetComponentsInChildren<Rigidbody>();
 		foreach (Rigidbody rig in rigs)
 		{
 			rig.isKinematic = true;
 		}
-		playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+		//if (levelName == "MyScene")
+		//{
+			playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+		//}
 		lastSeenPosition = transform.position;
 		playerCamera = Camera.main;
 		lastPosition = transform.position;
@@ -82,7 +88,7 @@ public class BadGuy : MonoBehaviour
 
 	IEnumerator Resurrect()
     {
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(resurrectTime);
 		if (Time.time - lastLazerTime > lazerInterval)
 		{
 			lastLazerTime = (Time.time - lazerInterval) + 1;
@@ -102,41 +108,51 @@ public class BadGuy : MonoBehaviour
 	{
 		if (!isDead)
 		{
-			/*Vector3 vect = playerController.transform.position - characterController.transform.position;
-			vect.y = 0;
-			characterController.transform.rotation = Quaternion.LookRotation(vect);
-			characterController.Move(vect.normalized * Time.deltaTime * moveSpeed);
-			*/
 
 			anim.SetFloat("Speed", 1);
-
-			if (Vector3.Dot(transform.forward, playerController.transform.position - transform.position) > 0)
-			{
-				RaycastHit hit;
-				if (Physics.Raycast(eyePos.transform.position, (playerCamera.transform.position - Vector3.up * 0.4f) - eyePos.transform.position, out hit, 2000f, layerMask))
+			//if (levelName == "MyScene")
+			//{
+				//if we are in the main scene
+				if (Vector3.Dot(transform.forward, playerController.transform.position - transform.position) > 0)
 				{
-					if (hit.transform.CompareTag("Player"))
+					//if player is in front of enemy
+					RaycastHit hit;
+					if (Physics.Raycast(eyePos.transform.position, (playerCamera.transform.position - Vector3.up * 0.4f) - eyePos.transform.position, out hit, 2000f, layerMask))
 					{
-						//Debug.Log("Rayhit = " + hit.point);
-						Debug.Log("#1");
-                        if (!canSeePlayer)
-                        {
-							if(Time.time - lastLazerTime > lazerInterval)
-                            {
-								lastLazerTime = (Time.time - lazerInterval) + 1;
+						//and there is clear line of sight
+						if (hit.transform.CompareTag("Player"))
+						{
+							Debug.Log("#1");
+							if (!canSeePlayer)
+							{
+								//if we now see player again, and a lazer is due, set lastLazerTime to 2 seconds ago, giving the player 1 second until next lazer
+								if (Time.time - lastLazerTime > lazerInterval)
+								{
+									lastLazerTime = (Time.time - lazerInterval) + 1;
+								}
 							}
-						}
-						canSeePlayer = true;
-						lastSeenPosition = playerCamera.transform.root.position;
-						lastSeenPosition.y = 0;
-						navagent.destination = lastSeenPosition;
+							canSeePlayer = true;
+							lastSeenPosition = playerCamera.transform.root.position;
+							lastSeenPosition.y = 0;
+							navagent.destination = lastSeenPosition;
 
-						setStartRotation = false;
-						rotateAngle = 0;
+							setStartRotation = false;
+							rotateAngle = 0;
+						}
+						else
+						{
+							Debug.Log("#1.0");
+							if (canSeePlayer)
+							{
+								GetTurnDirection();
+							}
+							canSeePlayer = false;
+							lookPoint = transform.forward * 100f;
+						}
 					}
 					else
 					{
-						Debug.Log("#1.0");
+						Debug.Log("#1.1");
 						if (canSeePlayer)
 						{
 							GetTurnDirection();
@@ -147,60 +163,80 @@ public class BadGuy : MonoBehaviour
 				}
 				else
 				{
-					Debug.Log("#1.1");
-                    if (canSeePlayer)
+					Debug.Log("#1.2");
+					if (canSeePlayer)
 					{
 						GetTurnDirection();
 					}
 					canSeePlayer = false;
 					lookPoint = transform.forward * 100f;
 				}
-			}
-			else
-			{
-				Debug.Log("#1.2");
-				if (canSeePlayer)
-				{
-					GetTurnDirection();
-				}
-				canSeePlayer = false;
-				lookPoint = transform.forward * 100f;
-			}
 
-			Vector3 distVect = lastSeenPosition - transform.position;
-			distVect.y = 0;
-			if ((distVect).magnitude > 5)
-			{
-				Debug.Log("#2");
-				Follow();
-			}
-			else
-			{
-				if (canSeePlayer)
+				Vector3 distVect = lastSeenPosition - transform.position;
+				distVect.y = 0;
+				if ((distVect).magnitude > 5)
 				{
-					Idle();
+					Debug.Log("#2");
+					Follow();
 				}
 				else
 				{
-					if (!setStartRotation)
+					if (canSeePlayer)
 					{
-						Debug.Log("###1 " + Time.time);
-						setStartRotation = true;
-						rotateAngle = 0f;
+						Idle();
 					}
-					Search();
+					else
+					{
+						if (!setStartRotation)
+						{
+							Debug.Log("###1 " + Time.time);
+							setStartRotation = true;
+							rotateAngle = 0f;
+						}
+						Search();
+					}
 				}
-			}
 
-            if (canSeePlayer)
-			{
-				lookPoint = playerCamera.transform.position;
-				Lazer();
+				if (canSeePlayer)
+				{
+					lookPoint = playerCamera.transform.position;
+					Lazer();
+				}
+				else
+				{
+					lookPoint = transform.forward * 100f;
+				}
             }
             else
             {
+				//if we are in the menu scene
+				Vector3 distVect = lastSeenPosition - transform.position;
+				distVect.y = 0;
+				if ((distVect).magnitude > 5)
+				{
+					Debug.Log("#2");
+					Follow();
+				}
+				else
+				{
+					turnDir = 1;
+					if (canSeePlayer)
+					{
+						Idle();
+					}
+					else
+					{
+						if (!setStartRotation)
+						{
+							Debug.Log("###1 " + Time.time);
+							setStartRotation = true;
+							rotateAngle = 0f;
+						}
+						Search();
+					}
+				}
 				lookPoint = transform.forward * 100f;
-            }
+			//}
 		}
 	}
 
@@ -309,7 +345,10 @@ public class BadGuy : MonoBehaviour
 
     private void LateUpdate()
 	{
-		headBone.LookAt(lookPoint);
+		if (!isDead)
+		{
+			headBone.LookAt(lookPoint);
+		}
 	}
 
 	void GetTurnDirection()

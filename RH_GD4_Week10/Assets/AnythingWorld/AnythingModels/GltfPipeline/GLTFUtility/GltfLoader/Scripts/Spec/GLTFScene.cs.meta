@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 1328a8789f9666842985198e60afb2ad
+timeCreated: 1539024181
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261647
+  packageName: Limitless Animated 3D Models by Anything World
+  packageVersion: 1.1.0.1
+  assetPath: Assets/AnythingWorld/AnythingModels/GltfPipeline/GLTFUtility/GltfLoader/Scripts/Spec/GLTFScene.cs
+  uploadId: 686391
