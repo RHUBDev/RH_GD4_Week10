@@ -20,13 +20,11 @@ public class MenuCam : MonoBehaviour
 
     public void MainGame()
     {
-        Debug.Log("MainGame");
         SceneManager.LoadScene("MyScene");
     }
 
     public void Practice()
     {
-        Debug.Log("Practice");
         SceneManager.LoadScene("Practice");
     }
 }

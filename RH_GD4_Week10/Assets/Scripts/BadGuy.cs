@@ -110,9 +110,7 @@ public class BadGuy : MonoBehaviour
 		{
 
 			anim.SetFloat("Speed", 1);
-			//if (levelName == "MyScene")
-			//{
-			//if we are in the main scene
+
 			if (Vector3.Dot(transform.forward, playerController.transform.position - transform.position) > 0)
 			{
 				//if player is in front of enemy
@@ -122,7 +120,6 @@ public class BadGuy : MonoBehaviour
 					//and there is clear line of sight
 					if (hit.transform.CompareTag("Player"))
 					{
-						Debug.Log("#1");
 						if (!canSeePlayer)
 						{
 							//if we now see player again, and a lazer is due, set lastLazerTime to 2 seconds ago, giving the player 1 second until next lazer
@@ -141,9 +138,9 @@ public class BadGuy : MonoBehaviour
 					}
 					else
 					{
-						Debug.Log("#1.0");
 						if (canSeePlayer)
 						{
+							//if could see player, but now can't, get the last seen direction
 							GetTurnDirection();
 						}
 						canSeePlayer = false;
@@ -152,9 +149,9 @@ public class BadGuy : MonoBehaviour
 				}
 				else
 				{
-					Debug.Log("#1.1");
 					if (canSeePlayer)
 					{
+						//if could see player, but now can't, get the last seen direction
 						GetTurnDirection();
 					}
 					canSeePlayer = false;
@@ -163,9 +160,9 @@ public class BadGuy : MonoBehaviour
 			}
 			else
 			{
-				Debug.Log("#1.2");
 				if (canSeePlayer)
 				{
+					//if could see player, but now can't, get the last seen direction
 					GetTurnDirection();
 				}
 				canSeePlayer = false;
@@ -174,22 +171,23 @@ public class BadGuy : MonoBehaviour
 
 			Vector3 distVect = lastSeenPosition - transform.position;
 			distVect.y = 0;
+			//if the horizontal 2d distance between the enemy and the player is over 5m, keep following the last seen position
 			if ((distVect).magnitude > 5)
 			{
-				Debug.Log("#2");
 				Follow();
 			}
 			else
 			{
+				//if less than 5m away, and can still see the player, stay here
 				if (canSeePlayer)
 				{
 					Idle();
 				}
 				else
 				{
+					//else, set rotateAngle to 0, then start searching by rotating on the spot
 					if (!setStartRotation)
 					{
-						Debug.Log("###1 " + Time.time);
 						setStartRotation = true;
 						rotateAngle = 0f;
 					}
@@ -199,47 +197,19 @@ public class BadGuy : MonoBehaviour
 
 			if (canSeePlayer)
 			{
+				//if can see player, look at him
 				lookPoint = playerCamera.transform.position;
 				Lazer();
 			}
 			else
 			{
+				//otherwise, look at a spot on the floor 100m away
 				lookPoint = transform.forward * 100f;
 			}
 		}
-		else
-		{
-			//if we are in the menu scene
-			Vector3 distVect = lastSeenPosition - transform.position;
-			distVect.y = 0;
-			if ((distVect).magnitude > 5)
-			{
-				Debug.Log("#2");
-				Follow();
-			}
-			else
-			{
-				turnDir = 1;
-				if (canSeePlayer)
-				{
-					Idle();
-				}
-				else
-				{
-					if (!setStartRotation)
-					{
-						Debug.Log("###1 " + Time.time);
-						setStartRotation = true;
-						rotateAngle = 0f;
-					}
-					Search();
-				}
-			}
-			lookPoint = transform.forward * 100f;
-			//}
-		}
 	}
 
+	//Used the OnFootstep and OnLand functions from the Sample player controller, cos otherwise the Sample animator had errors
 	private void OnFootstep(AnimationEvent animationEvent)
 	{
 		if (animationEvent.animatorClipInfo.weight > 0.5f)
@@ -262,20 +232,16 @@ public class BadGuy : MonoBehaviour
 
 	void Follow()
 	{
-
-		Debug.Log("#3");
+		//if we can't see player anymore, check if we are moving too little, if we are, we are probably stuck against a building at the end of our destination, so get a new random destination
 		if (Time.time > (lastPositionTime + 1) && !canSeePlayer)
 		{
 			if ((lastPosition - transform.position).magnitude > 0.3f)
 			{
-
-				Debug.Log("#4");
 				lastPositionTime = Time.time;
 				lastPosition = transform.position;
 			}
 			else
 			{
-				Debug.Log("#4.1");
 				GetRandomDestination();
 			}
 		}
@@ -283,12 +249,13 @@ public class BadGuy : MonoBehaviour
 
 	void Idle()
 	{
+		//set destination to here, and stay idle
 		navagent.destination = transform.position;
 	}
 
 	void Search()
 	{
-		Debug.Log("#5");
+		//at last seen player point, but can't see player, turn around in the direction we last saw him, if still can't see him after a 360 turn, get new random destination
         if (turnDir < 0)
         {
 			turnDir = -1;
@@ -303,14 +270,13 @@ public class BadGuy : MonoBehaviour
 		{
 			setStartRotation = false;
 			rotateAngle = 0;
-			Debug.Log("###2 " + Time.time);
 			GetRandomDestination();
 		}
 	}
 
 	void GetRandomDestination()
 	{
-		Debug.Log("#6");
+		//get new random destination
 		lastSeenPosition = new Vector3(Random.Range(-xRange, xRange), 0, Random.Range(-zRange, zRange));
 		lastSeenPosition.y = 0;
 		navagent.destination = lastSeenPosition;
@@ -318,11 +284,13 @@ public class BadGuy : MonoBehaviour
 
 	void Lazer()
     {
+		//Shoot lazers at player!
 		lazerR.SetPosition(0, lazerR.transform.position);
 		lazerL.SetPosition(0, lazerL.transform.position);
 
 		if (Time.time > lastLazerTime + lazerInterval)
         {
+			//if due for the next lasers, shoot at the player's chest area, but make the lasers go twice as far
 			lastLazerTime = Time.time;
 			Vector3 lazerpos = playerCamera.transform.position - Vector3.up * 0.5f;
 			Vector3 lazerposR = (lazerpos - lazerR.transform.position) *2 ;
@@ -335,6 +303,7 @@ public class BadGuy : MonoBehaviour
 
 	IEnumerator DoLazer()
     {
+		//enable, then disable, lasers
 		lazerR.enabled = true;
 		lazerL.enabled = true;
 		playerController.TakeDamage();
@@ -347,12 +316,14 @@ public class BadGuy : MonoBehaviour
 	{
 		if (!isDead)
 		{
+			//if not dead look at player if we can see him, or a point 100m forwards if not
 			headBone.LookAt(lookPoint);
 		}
 	}
 
 	void GetTurnDirection()
     {
+		//get the angle between last seen position of the player, and our forward vector
 		turnDir = Vector3.SignedAngle(transform.forward, lastSeenPosition - eyePos.transform.position, Vector3.up);
     }
 }

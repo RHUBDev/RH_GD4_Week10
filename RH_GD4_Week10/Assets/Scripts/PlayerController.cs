@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerCamera = Camera.main;
 
-        //googled how to reference ColorAdjustments
+        //I googled how to reference ColorAdjustments
         volume.profile.TryGet<ColorAdjustments>(out CA);
         levelName = SceneManager.GetActiveScene().name;
         

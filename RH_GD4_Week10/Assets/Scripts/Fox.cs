@@ -40,7 +40,8 @@ public class Fox : MonoBehaviour
             vect.y = 0;
             if (vect.magnitude > 1)
             {
-                transform.forward = vect;
+                Quaternion rot = Quaternion.LookRotation(vect, Vector3.up);
+                transform.rotation = rot;
                 transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
             }
             else
@@ -62,6 +63,7 @@ public class Fox : MonoBehaviour
                 }
             }
         }
+        transform.position = new Vector3(transform.position.x, 0.45f, transform.position.z);
     }
 
     void WaitForTomato()
@@ -76,11 +78,22 @@ public class Fox : MonoBehaviour
     }
 
 
-    private void OnCollisionStay(Collision collision)
+    /*private void OnCollisionStay(Collision collision)
     {
         if (collision.transform.CompareTag("Vehicle"))
         {
             if (collision.transform.GetComponent<StatusMonitor>().status.text == "Travelling...")
+            {
+                gameObject.SetActive(false);
+            }
+        }
+    }*/
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("Vehicle"))
+        {
+            if (other.transform.GetComponent<StatusMonitor>().status.text == "Travelling...")
             {
                 gameObject.SetActive(false);
             }

@@ -23,16 +23,19 @@ public class Tractor : MonoBehaviour
     private Camera cam;
     private float statusAboveAmount = 1f;
     private Vector3 message2AboveVector = new Vector3(0,30,0);
-    private int lives = 3;
+    private int lives = 1;
     [SerializeField] Harvester harvester;
     [SerializeField] private TMP_Text endText;
     [SerializeField] private TMP_Text livesText;
+    [SerializeField] private TMP_Text timeText;
     private bool dead = false;
     private bool spawningFox = true;
     [SerializeField] Transform[] foxLocations;
     [SerializeField] Fox fox;
     private float statusWait = 1.5f;
     private float statusTimer = 1.5f;
+    private float gameTimer = 100f;
+    //private float gameTime = 100f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,6 +52,16 @@ public class Tractor : MonoBehaviour
     {
         if (!dead)
         {
+            if (gameTimer > 0)
+            {
+                gameTimer -= Time.deltaTime;
+                timeText.text = "" + Mathf.CeilToInt(gameTimer).ToString();
+            }
+            else
+            {
+                timeText.text = "" + 0;
+                CropEaten();
+            }
             if (statusTimer < 1.5f)
             {
                 statusTimer += Time.deltaTime;
@@ -143,13 +156,14 @@ public class Tractor : MonoBehaviour
                 }
 
                 StartCoroutine(DoDie());
+                Time.timeScale = 0f;
             }
         }
     }
 
     IEnumerator DoDie()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSecondsRealtime(3);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
