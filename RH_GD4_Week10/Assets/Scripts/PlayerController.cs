@@ -51,17 +51,26 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        lookXLimit = 85f;
         Time.timeScale = 1f;
         healthText.text = "Lives: " + health;
         controller = GetComponent<CharacterController>();
         playerCamera = Camera.main;
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
         //googled how to reference ColorAdjustments
         volume.profile.TryGet<ColorAdjustments>(out CA);
         levelName = SceneManager.GetActiveScene().name;
+        
+        if (levelName != "SuperheroMenu")
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     // Update is called once per frame
@@ -69,7 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!dead)
         {
-            if (levelName == "MyScene")
+            if (levelName != "SuperheroMenu")
             {
                 #region Movement
 
@@ -281,7 +290,7 @@ public class PlayerController : MonoBehaviour
                 #endregion
             }
         }
-        if (levelName == "MyScene")
+        if (levelName != "SuperheroMenu")
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -357,7 +366,8 @@ public class PlayerController : MonoBehaviour
             //googled how to set ColorAdjustments, but did the Lerp myself
             CA.colorFilter.SetValue(VP);
         }
-        if (levelName == "MyScene")
+
+        if (levelName != "SuperheroMenu")
         {
             yield return new WaitForSeconds(3);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

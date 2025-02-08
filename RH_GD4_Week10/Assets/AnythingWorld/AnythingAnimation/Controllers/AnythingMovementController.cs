@@ -83,7 +83,7 @@ namespace AnythingWorld.Animation
                 movement = movement.normalized * maxSpeed * Time.deltaTime;
 
                 //rb.MovePosition(rb.position + movement);
-                rb.velocity = movement;
+                rb.linearVelocity = movement;
                 Turn();
             }
         }
@@ -107,7 +107,7 @@ namespace AnythingWorld.Animation
             animator.SetBool("IsGround", isGround);*/
             _legacyController.walkThreshold = 0.1f;
             _legacyController.runThreshold = 0.8f;
-            _legacyController.BlendMovementAnimationOnSpeed(rb.velocity.magnitude);
+            _legacyController.BlendMovementAnimationOnSpeed(rb.linearVelocity.magnitude);
         }
 
         void OnCollisionStay(Collision other)

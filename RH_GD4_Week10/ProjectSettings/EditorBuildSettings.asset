@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SuperheroMenu.unity
-    guid: 2fed0ad8cc0e99544aa5b3ed15152c62
+    path: Assets/Scenes/FarmMenu.unity
+    guid: 6cd72b76fbcfb794ba14d701f64086ea
   - enabled: 1
-    path: Assets/Scenes/MyScene.unity
-    guid: a997f07760fb87e4d8dd308c2ed2fe32
+    path: Assets/BasicFarmingSimulator/Scene/BasicFarmingSimulator.unity
+    guid: 97d1098ed05384208b744ddbf6ae2482
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

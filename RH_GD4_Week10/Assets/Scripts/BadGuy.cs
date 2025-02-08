@@ -112,47 +112,36 @@ public class BadGuy : MonoBehaviour
 			anim.SetFloat("Speed", 1);
 			//if (levelName == "MyScene")
 			//{
-				//if we are in the main scene
-				if (Vector3.Dot(transform.forward, playerController.transform.position - transform.position) > 0)
+			//if we are in the main scene
+			if (Vector3.Dot(transform.forward, playerController.transform.position - transform.position) > 0)
+			{
+				//if player is in front of enemy
+				RaycastHit hit;
+				if (Physics.Raycast(eyePos.transform.position, (playerCamera.transform.position - Vector3.up * 0.4f) - eyePos.transform.position, out hit, 2000f, layerMask))
 				{
-					//if player is in front of enemy
-					RaycastHit hit;
-					if (Physics.Raycast(eyePos.transform.position, (playerCamera.transform.position - Vector3.up * 0.4f) - eyePos.transform.position, out hit, 2000f, layerMask))
+					//and there is clear line of sight
+					if (hit.transform.CompareTag("Player"))
 					{
-						//and there is clear line of sight
-						if (hit.transform.CompareTag("Player"))
+						Debug.Log("#1");
+						if (!canSeePlayer)
 						{
-							Debug.Log("#1");
-							if (!canSeePlayer)
+							//if we now see player again, and a lazer is due, set lastLazerTime to 2 seconds ago, giving the player 1 second until next lazer
+							if (Time.time - lastLazerTime > lazerInterval)
 							{
-								//if we now see player again, and a lazer is due, set lastLazerTime to 2 seconds ago, giving the player 1 second until next lazer
-								if (Time.time - lastLazerTime > lazerInterval)
-								{
-									lastLazerTime = (Time.time - lazerInterval) + 1;
-								}
+								lastLazerTime = (Time.time - lazerInterval) + 1;
 							}
-							canSeePlayer = true;
-							lastSeenPosition = playerCamera.transform.root.position;
-							lastSeenPosition.y = 0;
-							navagent.destination = lastSeenPosition;
+						}
+						canSeePlayer = true;
+						lastSeenPosition = playerCamera.transform.root.position;
+						lastSeenPosition.y = 0;
+						navagent.destination = lastSeenPosition;
 
-							setStartRotation = false;
-							rotateAngle = 0;
-						}
-						else
-						{
-							Debug.Log("#1.0");
-							if (canSeePlayer)
-							{
-								GetTurnDirection();
-							}
-							canSeePlayer = false;
-							lookPoint = transform.forward * 100f;
-						}
+						setStartRotation = false;
+						rotateAngle = 0;
 					}
 					else
 					{
-						Debug.Log("#1.1");
+						Debug.Log("#1.0");
 						if (canSeePlayer)
 						{
 							GetTurnDirection();
@@ -163,7 +152,7 @@ public class BadGuy : MonoBehaviour
 				}
 				else
 				{
-					Debug.Log("#1.2");
+					Debug.Log("#1.1");
 					if (canSeePlayer)
 					{
 						GetTurnDirection();
@@ -171,71 +160,82 @@ public class BadGuy : MonoBehaviour
 					canSeePlayer = false;
 					lookPoint = transform.forward * 100f;
 				}
-
-				Vector3 distVect = lastSeenPosition - transform.position;
-				distVect.y = 0;
-				if ((distVect).magnitude > 5)
-				{
-					Debug.Log("#2");
-					Follow();
-				}
-				else
-				{
-					if (canSeePlayer)
-					{
-						Idle();
-					}
-					else
-					{
-						if (!setStartRotation)
-						{
-							Debug.Log("###1 " + Time.time);
-							setStartRotation = true;
-							rotateAngle = 0f;
-						}
-						Search();
-					}
-				}
-
+			}
+			else
+			{
+				Debug.Log("#1.2");
 				if (canSeePlayer)
 				{
-					lookPoint = playerCamera.transform.position;
-					Lazer();
+					GetTurnDirection();
 				}
-				else
-				{
-					lookPoint = transform.forward * 100f;
-				}
-            }
-            else
-            {
-				//if we are in the menu scene
-				Vector3 distVect = lastSeenPosition - transform.position;
-				distVect.y = 0;
-				if ((distVect).magnitude > 5)
-				{
-					Debug.Log("#2");
-					Follow();
-				}
-				else
-				{
-					turnDir = 1;
-					if (canSeePlayer)
-					{
-						Idle();
-					}
-					else
-					{
-						if (!setStartRotation)
-						{
-							Debug.Log("###1 " + Time.time);
-							setStartRotation = true;
-							rotateAngle = 0f;
-						}
-						Search();
-					}
-				}
+				canSeePlayer = false;
 				lookPoint = transform.forward * 100f;
+			}
+
+			Vector3 distVect = lastSeenPosition - transform.position;
+			distVect.y = 0;
+			if ((distVect).magnitude > 5)
+			{
+				Debug.Log("#2");
+				Follow();
+			}
+			else
+			{
+				if (canSeePlayer)
+				{
+					Idle();
+				}
+				else
+				{
+					if (!setStartRotation)
+					{
+						Debug.Log("###1 " + Time.time);
+						setStartRotation = true;
+						rotateAngle = 0f;
+					}
+					Search();
+				}
+			}
+
+			if (canSeePlayer)
+			{
+				lookPoint = playerCamera.transform.position;
+				Lazer();
+			}
+			else
+			{
+				lookPoint = transform.forward * 100f;
+			}
+		}
+		else
+		{
+			//if we are in the menu scene
+			Vector3 distVect = lastSeenPosition - transform.position;
+			distVect.y = 0;
+			if ((distVect).magnitude > 5)
+			{
+				Debug.Log("#2");
+				Follow();
+			}
+			else
+			{
+				turnDir = 1;
+				if (canSeePlayer)
+				{
+					Idle();
+				}
+				else
+				{
+					if (!setStartRotation)
+					{
+						Debug.Log("###1 " + Time.time);
+						setStartRotation = true;
+						rotateAngle = 0f;
+					}
+					Search();
+				}
+			}
+			lookPoint = transform.forward * 100f;
 			//}
 		}
 	}

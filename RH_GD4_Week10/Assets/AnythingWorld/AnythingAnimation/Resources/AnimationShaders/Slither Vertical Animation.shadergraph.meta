@@ -8,11 +8,3 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
-AssetOrigin:
-  serializedVersion: 1
-  productId: 261647
-  packageName: Limitless Animated 3D Models by Anything World
-  packageVersion: 1.1.0.1
-  assetPath: Assets/AnythingWorld/AnythingAnimation/Resources/AnimationShaders/Slither
-    Vertical Animation.shadergraph
-  uploadId: 686391

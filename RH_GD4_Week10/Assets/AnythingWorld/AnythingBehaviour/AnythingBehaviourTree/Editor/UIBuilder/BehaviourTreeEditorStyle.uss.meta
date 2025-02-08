@@ -9,10 +9,3 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 12385, guid: 0000000000000000e000000000000000, type: 0}
   disableValidation: 0
-AssetOrigin:
-  serializedVersion: 1
-  productId: 261647
-  packageName: Limitless Animated 3D Models by Anything World
-  packageVersion: 1.1.0.1
-  assetPath: Assets/AnythingWorld/AnythingBehaviour/AnythingBehaviourTree/Editor/UIBuilder/BehaviourTreeEditorStyle.uss
-  uploadId: 686391

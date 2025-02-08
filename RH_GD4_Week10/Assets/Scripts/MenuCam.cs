@@ -16,10 +16,17 @@ public class MenuCam : MonoBehaviour
     void Update()
     {
         transform.LookAt(enemyPoint);
+    }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneManager.LoadScene("MyScene");
-        }
+    public void MainGame()
+    {
+        Debug.Log("MainGame");
+        SceneManager.LoadScene("MyScene");
+    }
+
+    public void Practice()
+    {
+        Debug.Log("Practice");
+        SceneManager.LoadScene("Practice");
     }
 }

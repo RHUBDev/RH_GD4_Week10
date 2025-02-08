@@ -111,10 +111,3 @@ PluginImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 261647
-  packageName: Limitless Animated 3D Models by Anything World
-  packageVersion: 1.1.0.1
-  assetPath: Assets/AnythingWorld/AnythingModels/GltfPipeline/GLTFUtility/GltfLoader/Plugins/draco/Plugin/Android/libs/arm64-v8a/libdracodec_unity.so
-  uploadId: 686391
